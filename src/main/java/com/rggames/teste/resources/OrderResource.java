@@ -14,7 +14,7 @@ import com.rggames.teste.services.OrderService;
 
 
 @RestController
-@RequestMapping(value = "/Orders")
+@RequestMapping(value = "/orders")
 public class OrderResource {
 	
 	@Autowired

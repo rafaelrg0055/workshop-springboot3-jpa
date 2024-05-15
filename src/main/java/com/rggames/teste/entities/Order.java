@@ -38,7 +38,7 @@ public class Order implements Serializable{
 	private Integer orderStatus;
 	
 	@ManyToOne
-	@JoinColumn(name = "cliente_id")
+	@JoinColumn(name = "client_id")
 	private User client;
 	
 	@OneToMany(mappedBy = "id.order")
@@ -59,8 +59,8 @@ public class Order implements Serializable{
 		super();
 		this.id = id;
 		this.moment = moment;
-		setOrderStatus(orderStatus);
 		this.client = client;
+		setOrderStatus(orderStatus);
 	}
 	
 	//GET SET  --------------------------------------------------------	
@@ -79,7 +79,7 @@ public class Order implements Serializable{
 		this.moment = moment;
 	}
 
-	public OrderStatus getoOrderStatus() {
+	public OrderStatus getOrderStatus() {
 		return OrderStatus.valueOf(orderStatus);
 	}
 	public void setOrderStatus(OrderStatus orderStatus) {
