@@ -13,6 +13,8 @@ import com.rggames.teste.repositories.UserRepository;
 import com.rggames.teste.services.exceptions.DatabaseException;
 import com.rggames.teste.services.exceptions.ResourceNotFoundException;
 
+import jakarta.persistence.EntityNotFoundException;
+
 @Service
 public class UserService {
 	
@@ -47,9 +49,14 @@ public class UserService {
 	}
 	
 	public User update(Long id, User obj) {
-		User entity = repository.getReferenceById(id);
-		updateData(entity, obj);
-		return repository.save(entity);
+		try {
+			User entity = repository.getReferenceById(id);
+			updateData(entity, obj);
+			return repository.save(entity);
+		}catch (EntityNotFoundException e) {
+			throw new ResourceNotFoundException(id);
+		}
+
 	}
 
 	private void updateData(User entity, User obj) {   // não vai atualizar "id" nem "senha"
