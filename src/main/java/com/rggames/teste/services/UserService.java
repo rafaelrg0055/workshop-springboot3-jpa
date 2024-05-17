@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.rggames.teste.entities.User;
 import com.rggames.teste.repositories.UserRepository;
+import com.rggames.teste.services.exceptions.ResourceNotFoundException;
 
 @Service
 public class UserService {
@@ -22,7 +23,7 @@ public class UserService {
 	
 	public User findById(Long id) {
 		Optional<User> obj = repository.findById(id);
-		return obj.get();
+		return obj.orElseThrow(() -> new ResourceNotFoundException(id));
 	}
 	
 	
